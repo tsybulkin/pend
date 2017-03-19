@@ -17,9 +17,11 @@ Et = 0.97*m*G*L/2
 
 
 def control(a,da):
+	#return lim(U_MAX, 0.3 * np.sign(da))
+
 	E = m*(L*da)**2/6 + m*G*L/2*np.cos(a)	
 	if E < Et:
-		return lim(U_MAX, 1.3 * np.sign(da))
+		return lim(U_MAX, 0.3 * np.sign(da))
 	elif abs(a) < 0.5:
 		return lim(U_MAX, -9.1*a - 3.*da)
 	elif abs(2*np.pi - a) < 0.5:
@@ -42,6 +44,7 @@ def run(T=1):
 	[Ti, A, dA, U] = zip(*log)
 	#plt.plot(Ti, A, '--')
 	plt.scatter(A,dA)
+	plt.grid(True)
 	plt.show()
 
 
